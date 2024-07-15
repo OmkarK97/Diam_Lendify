@@ -34,9 +34,12 @@ const COP = () => {
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await axios.get("http://localhost:3000/userData/get", {
-        params: { address: walletData?.public_key },
-      });
+      const response = await axios.get(
+        "https://lendify-backend-nmnj.vercel.app/userData/get",
+        {
+          params: { address: walletData?.public_key },
+        }
+      );
       setDBdata(response.data.msg);
     } catch (error) {
       console.error(error);
@@ -135,10 +138,13 @@ const COP = () => {
           Available_Borrow_USDC: 0,
         };
 
-        await axios.post("http://localhost:3000/userData/send", userData);
+        await axios.post(
+          "https://lendify-backend-nmnj.vercel.app/userData/send",
+          userData
+        );
 
         await axios.post(
-          "http://localhost:3000/protocolData/send",
+          "https://lendify-backend-nmnj.vercel.app/protocolData/send",
           protocolData
         );
 
@@ -199,10 +205,13 @@ const COP = () => {
             Available_Borrow_USDC: 0,
           };
 
-          await axios.post("http://localhost:3000/userData/send", userData);
+          await axios.post(
+            "https://lendify-backend-nmnj.vercel.app/userData/send",
+            userData
+          );
 
           await axios.post(
-            "http://localhost:3000/protocolData/send",
+            "https://lendify-backend-nmnj.vercel.app/protocolData/send",
             protocolData
           );
 
@@ -280,10 +289,13 @@ const COP = () => {
         );
 
         if (data) {
-          await axios.post("http://localhost:3000/userData/send", userData);
+          await axios.post(
+            "https://lendify-backend-nmnj.vercel.app/userData/send",
+            userData
+          );
 
           await axios.post(
-            "http://localhost:3000/protocolData/send",
+            "https://lendify-backend-nmnj.vercel.app/protocolData/send",
             protocolData
           );
         }
@@ -354,9 +366,12 @@ const COP = () => {
         });
 
         if (parseInt(manageAmount) > 0 && data) {
-          await axios.post("http://localhost:3000/userData/send", userData);
           await axios.post(
-            "http://localhost:3000/protocolData/send",
+            "https://lendify-backend-nmnj.vercel.app/userData/send",
+            userData
+          );
+          await axios.post(
+            "https://lendify-backend-nmnj.vercel.app/protocolData/send",
             protocolData
           );
           fetchData();

@@ -70,7 +70,10 @@ const CreateWallet = () => {
         Last_Supplied: 0,
       };
 
-      await axios.post("http://localhost:3000/userData/send", data);
+      await axios.post(
+        "https://lendify-backend-nmnj.vercel.app/userData/send",
+        data
+      );
 
       setSubmit(false);
 

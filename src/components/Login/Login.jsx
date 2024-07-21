@@ -17,7 +17,6 @@ const Login = ({ diam_details }) => {
 
   const handleLogin = () => {
     const decryptData = decrypt(diam_details, password);
-    // console.log(decryptData);
     if (decryptData) {
       setData(decryptData);
       navigate("/lending_borrowing");

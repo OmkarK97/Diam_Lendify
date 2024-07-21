@@ -23,7 +23,7 @@ const Modal = ({ isOpen, onClose }) => {
       setDepositBalance(DBalance);
 
       const { data: userResponse } = await axios.get(
-        "http://localhost:3000/userData/get",
+        "https://lendify-backend-nmnj.vercel.app/userData/get",
         {
           params: { address: data?.public_key },
         }
@@ -50,14 +50,11 @@ const Modal = ({ isOpen, onClose }) => {
 
   const handleAction = async (isDeposit) => {
     setIsLoading(true);
-    console.log(isDeposit);
     const actionAmount = isDeposit ? parseInt(amount) : parseInt(amount * -1);
 
     const interest_per_sec = 0.000000192;
 
     const { Total_Diam_Deposit, Last_Borrowed, Total_USDC_Borrowed } = dbData;
-
-    console.log(Total_Diam_Deposit, Last_Borrowed, Total_USDC_Borrowed);
 
     const diam_to_usdc = Total_Diam_Deposit * 0.8;
 
@@ -67,16 +64,10 @@ const Modal = ({ isOpen, onClose }) => {
       Total_USDC_Borrowed * interest_per_sec * time_since_borrowed +
       Total_USDC_Borrowed;
 
-    console.log(current_loan);
-
     const minimut_liquidity_threshold = current_loan * 1.125;
-
-    console.log(minimut_liquidity_threshold);
 
     const available_to_withdraw =
       (diam_to_usdc - minimut_liquidity_threshold) / 0.8;
-
-    console.log(available_to_withdraw);
 
     try {
       const userData = {
@@ -93,7 +84,6 @@ const Modal = ({ isOpen, onClose }) => {
         Available_Borrow_USDC: 0,
       };
       if (!isDeposit) {
-        console.log(!isDeposit);
         if (parseInt(amount) <= available_to_withdraw) {
           await transferDiam(
             isDeposit ? userPair : protocolPair,
@@ -113,11 +103,11 @@ const Modal = ({ isOpen, onClose }) => {
             }
           );
           const { data: userResponse } = await axios.post(
-            "http://localhost:3000/userData/send",
+            "https://lendify-backend-nmnj.vercel.app/userData/send",
             userData
           );
           await axios.post(
-            "http://localhost:3000/protocolData/send",
+            "https://lendify-backend-nmnj.vercel.app/protocolData/send",
             protocolData
           );
           setWithdrawBalance(userResponse?.data?.response?.Total_Diam_Deposit);
@@ -153,11 +143,11 @@ const Modal = ({ isOpen, onClose }) => {
           theme: "dark",
         });
         const { data: userResponse } = await axios.post(
-          "http://localhost:3000/userData/send",
+          "https://lendify-backend-nmnj.vercel.app/userData/send",
           userData
         );
         await axios.post(
-          "http://localhost:3000/protocolData/send",
+          "https://lendify-backend-nmnj.vercel.app/protocolData/send",
           protocolData
         );
         setWithdrawBalance(userResponse?.data?.response?.Total_Diam_Deposit);

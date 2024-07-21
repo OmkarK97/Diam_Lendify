@@ -605,10 +605,13 @@ const COP = () => {
               <p>Liquidation price</p>
               <h3>
                 ${" "}
-                {(
-                  dbData?.Total_USDC_Borrowed /
-                  (dbData?.Total_Diam_Deposit * 0.8 * 0.9)
-                ).toFixed(2)}
+                {dbData.Total_Diam_Deposit === 0 &&
+                dbData.Total_USDC_Borrowed === 0
+                  ? "0.00"
+                  : (
+                      dbData?.Total_USDC_Borrowed /
+                      (dbData?.Total_Diam_Deposit * 0.8 * 0.9)
+                    ).toFixed(2)}
               </h3>
             </div>
             <div className="flex flex-row mx-[20px] justify-between mt-[20px]">
@@ -621,9 +624,12 @@ const COP = () => {
             <div className="flex flex-row mx-[20px] justify-between mt-[20px]">
               <p>LTV</p>
               <h3>
-                {((dbData.Total_Diam_Deposit * 0.8) /
-                  dbData.Total_USDC_Borrowed) *
-                  100}{" "}
+                {dbData.Total_Diam_Deposit === 0 &&
+                dbData.Total_USDC_Borrowed === 0
+                  ? "0.00"
+                  : ((dbData.Total_Diam_Deposit * 0.8) /
+                      dbData.Total_USDC_Borrowed) *
+                    100}{" "}
                 %
               </h3>
             </div>

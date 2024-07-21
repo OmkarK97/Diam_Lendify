@@ -1,0 +1,9 @@
+//brdgetoDiam
+
+-create 3 assest
+-approve(bridgeAddress, parseEth(amount))
+-funtion brdgetoDiam call
+-changeTrust(userpair, asset, limit)
+-transferAssets(senderKepair, reciverPublicKey, asset, amount)
+
+//diamtobrridge
